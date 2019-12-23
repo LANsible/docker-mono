@@ -1,0 +1,18 @@
+---
+services:
+  - docker:19.03-dind
+
+variables:
+  DOCKER_IMAGE_NAME: lansible/mono
+
+include:
+  - template: Container-Scanning.gitlab-ci.yml
+  - remote: https://raw.githubusercontent.com/LANsible/gitlab-includes/master/docker-login.yml
+  - remote: https://raw.githubusercontent.com/LANsible/gitlab-includes/master/docker-build.yml
+  - remote: https://raw.githubusercontent.com/LANsible/gitlab-includes/master/sast-cis-benchmark.yml
+
+stages:
+  - build
+  - test
+  - publish
+  - manifest
